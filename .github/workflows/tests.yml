@@ -19,5 +19,9 @@ jobs:
       - run: pip install -e ".[dev]"
       - run: ruff check .
       - run: pytest -q
-      - name: Smoke test on the synthetic sample
-        run: python run_backtest.py
+      - name: Smoke tests on the synthetic sample
+        run: |
+          python run_backtest.py
+          python run_backtest.py --strategy mean_reversion
+          python run_backtest.py --strategy pairs
+          python -m scripts.find_pairs

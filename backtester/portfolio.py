@@ -14,8 +14,8 @@ from backtester.performance import summary_stats
 class Portfolio:
     """Tracks positions and mark-to-market holdings, and sizes orders.
 
-    Orders use a fixed lot size; this keeps the engine simple and makes it
-    easy to plug in a risk-based sizing rule later.
+    Orders use a fixed lot size, scaled by the signal strength (a pairs strategy
+    uses it for the hedge ratio); a risk-based sizing rule can be plugged in later.
     """
 
     def __init__(
@@ -81,10 +81,11 @@ class Portfolio:
     def generate_order(self, signal: SignalEvent) -> OrderEvent | None:
         """Translate a signal into a market order given the current position."""
         quantity = self.current_positions[signal.symbol]
+        size = max(1, round(self.lot_size * signal.strength))  # strength scales the lot (e.g. a hedge ratio)
         if signal.signal_type == "LONG" and quantity == 0:
-            return OrderEvent(signal.symbol, "MKT", self.lot_size, "BUY")
+            return OrderEvent(signal.symbol, "MKT", size, "BUY")
         if signal.signal_type == "SHORT" and quantity == 0:
-            return OrderEvent(signal.symbol, "MKT", self.lot_size, "SELL")
+            return OrderEvent(signal.symbol, "MKT", size, "SELL")
         if signal.signal_type == "EXIT" and quantity != 0:
             return OrderEvent(signal.symbol, "MKT", abs(quantity), "SELL" if quantity > 0 else "BUY")
         return None
