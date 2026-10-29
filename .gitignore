@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# Secrets
+.env
+
+# Generated data and results (the synthetic sample is kept)
+data/*
+!data/sample/
+results/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
