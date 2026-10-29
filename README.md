@@ -1,6 +1,6 @@
 # Event-driven backtester & securities master
 
-[![tests](https://github.com/Matthis44/TradingAppPY/actions/workflows/tests.yml/badge.svg)](https://github.com/Matthis44/TradingAppPY/actions/workflows/tests.yml)
+[![tests](https://github.com/Matthis44/Backtesting_PY/actions/workflows/tests.yml/badge.svg)](https://github.com/Matthis44/Backtesting_PY/actions/workflows/tests.yml)
 ![Python](https://img.shields.io/badge/python-3.10%E2%80%933.13-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -62,8 +62,8 @@ before the next bar is released.
 ## Quick start
 
 ```bash
-git clone https://github.com/Matthis44/TradingAppPY.git
-cd TradingAppPY
+git clone https://github.com/Matthis44/Backtesting_PY.git
+cd Backtesting_PY
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
